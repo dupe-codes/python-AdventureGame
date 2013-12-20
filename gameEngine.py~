@@ -1,0 +1,73 @@
+import sys
+import time
+
+from gameMechanics import *
+
+class Scene():
+    def run(self):
+        pass
+
+class OpeningTownScene(Scene):
+
+    def run(self):
+        print '\nCONTAGION'
+        print '\n--------\n'
+        print ('You awake to the sight of your hunting bow, resting on your bedside table,' 
+               ' illuminated by a beam of light shining through the small slit in your window.\n'
+               'You reach out and grab it, slinging it over your shoulder along with the quiver of '
+               'arrows that laid on the ground beside it. \nIt\'s early morning, and the sun has just begun to rise. ')
+        time.sleep(5)
+        print('Now is the perfect time to head into the wilderness and begun the day\'s hunt.\n'
+               '\nOn your way out of the door, you notice your younger brother, sitting'
+               ' at the kitchen table, staring off into the distance. \nHe just turned 16. Old enough for'
+               ' the draft now...')
+        time.sleep(5)
+        print '\nHesitation hits you as you\'re about to exit out the front door. \n'
+        time.sleep(1)
+        print '.'
+        time.sleep(1)
+        print '.'
+        time.sleep(1)
+        print '.'
+        time.sleep(1)
+        choice = get_valid_choice('Should you ask him to come along?', ['yes', 'no'])
+        
+        exit(1)
+
+class Map():
+    #scenes = {'Opening_Town': openingTownScene(),}
+    
+    def __init__(self, start_scene, player):
+        self.scenes = {'Opening_Town': OpeningTownScene()}
+        self.start_scene_name = start_scene
+        self.player = player
+        print 'Map created with player ', player
+
+    def opening_scene(self):
+        return self.scenes.get(self.start_scene_name)
+
+    def next_scene(self, scene_name):
+        return self.scenes.get(scene_name)
+
+    
+
+class Engine():
+    
+    def __init__(self, map):
+        print 'Game Engine initialized with map ', map.start_scene_name
+        self.scene_map = map
+
+
+    def play(self):
+        current_scene = self.scene_map.opening_scene()
+        print 'Playing first scene: ', current_scene
+
+        while True:
+            print '\n--------'
+            next_scene_name = current_scene.run()
+            print 'Next scene: ', next_scene_name
+            current_scene = self.scene_map.next_scene(next_scene_name)
+            print "Map gives new scene: ", current_scene 
+
+
+
