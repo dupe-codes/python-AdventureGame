@@ -1,4 +1,0 @@
-
-def get_valid_choice(question, options)
-    while True:
-    
