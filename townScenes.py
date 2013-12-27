@@ -4,6 +4,7 @@ import sys
 from gameMechanics import *
 
 def takeBrotherInteraction(player):
+    Jakob = Ally('Jakob', 'gunman')
     print ('You turn away from the door and walk towards your brother...\n'
             'As you approach, his head turns towards you and his eyes meet your gaze.\n'
             '\"Hey, ' + player.name + ' up and ready for the morning hunt, huh?\"'
@@ -18,12 +19,16 @@ def takeBrotherInteraction(player):
             '\"You want me to come along!\" He interupts you, overcome with excitement.\n'
             '\"Yeah, yeah that\'s exactly what I want.\"')
     
-    print '\n\"But why? Do you think I\'m ready?\"'
+    print '\n\"But why?\"'
     print('Answer:\n'
-            '1. Yes, I think you\'re ready to become a hunter, Jakob.\n'
+            '1. Because I think you\'re ready to become a hunter, Jakob.\n'
             '2. I want to spend some time with you.\n'
-            '3. It\'s someone else learns to support the family\n')
-    choice = get_valid_choice("Which do you say?", ['1','2','3'])
+            '3. It\'s someone else learns to support the family\n'
+            '4. You need to learn to defend yourself...\n')
+    choice = get_valid_choice("Which do you say?", ['1','2','3','4'])
+
+    #if choice == '1':
+
 
     
 

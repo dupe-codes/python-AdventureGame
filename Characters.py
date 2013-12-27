@@ -21,6 +21,7 @@ class Ally:
     def __init__(self, name, char_type):
         self.character = classes[char_type]
         self.name = name
+        self.inventory = []
 
         # Rating of Character's Morale 
         self.morale = 0 
@@ -38,14 +39,28 @@ class Ally:
     def setHealth(self, health):
         self.character.health = health
 
+    def inInventory(self, item):
+        return item in self.inventory
+
+    def addToInventory(self, item):
+        self.inventory.append(item)
+
+    def removeFromInventory(self, item):
+        if item in self.inventory:
+            self.inventory.remove(item)
+            return True
+        else:
+            return False
+
     def getInfo(self):
-        return self.name, self.character.health
+        return self.name, self.character.health, self.inventory
 
 class Player():
     def __init__(self, name):
         self.name = name
         self.health = 100
         self.skills = ['archery', 'fishing', 'bartering']
+        self.inventory = ['bow', 'arrows']
         
         # Map of story event names to player decisions in those events.
         self.decisions = {} 
@@ -69,8 +84,21 @@ class Player():
     def setHealth(self, health):
         self.health = health
 
+    def inInventory(self, item):
+        return item in self.inventory
+
+    def addToInventory(self, item):
+        self.inventory.append(item)
+
+    def removeFromInventory(self, item):
+        if item in self.inventory:
+            self.inventory.remove(item)
+            return True
+        else:
+            return False
+
     def getInfo(self):
-        return self.name, self.health, self.skills
+        return self.name, self.health, self.skills, self.inventory
 
 
 

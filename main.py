@@ -17,6 +17,15 @@ def test():
     print 'Testing character creation..'
     testPlayer = Player('Edward')
     print testPlayer.name
+    print testPlayer.getInfo()
+
+    print 'has bow? ', testPlayer.inInventory('bow')
+    print 'has knife? ', testPlayer.inInventory('knife')
+    testPlayer.addToInventory('knife')
+    print 'Now has knife? ', testPlayer.inInventory('knife')
+    testPlayer.removeFromInventory('arrows')
+    print 'Has arrows? ', testPlayer.inInventory('arrows')
+    print testPlayer.inventory
     
     g_map = Map('Opening_Town', testPlayer)
     g_engine = Engine(g_map)
@@ -37,6 +46,7 @@ def openingGameMessage():
 if __name__ == '__main__':
     #test()
     #testAllyCreation()
+
     openingGameMessage()
     player = player_creation()
     raw_input('Great! You\'re all set! Press Enter to begin!')
