@@ -51,7 +51,9 @@ if __name__ == '__main__':
     player = player_creation()
     raw_input('Great! You\'re all set! Press Enter to begin!')
     
-    g_map = Map('Opening_Town', player)
+    g_map = Map('Opening_Scene', player)
     g_engine = Engine(g_map)
     g_engine.play()
+    #g_engine.test()
+
 

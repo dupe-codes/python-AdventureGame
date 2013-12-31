@@ -18,16 +18,16 @@ class Gunman():
 classes = {'archer': Archer(), 'swordsman': Swordsman(), 'gunman': Gunman()}
         
 class Ally:
-    def __init__(self, name, char_type):
+    def __init__(self, name, char_type, opinion, morale):
         self.character = classes[char_type]
         self.name = name
         self.inventory = []
 
         # Rating of Character's Morale 
-        self.morale = 0 
+        self.morale = morale 
 
         # Rating of character's opinion of player character 
-        self.playerOpinion = 0
+        self.playerOpinion = opinion
 
         # Maps story events to character's opinion of player actions
         self.memories = {}
@@ -38,6 +38,12 @@ class Ally:
     
     def setHealth(self, health):
         self.character.health = health
+
+    def updateMorale(self, change):
+        self.morale += change
+
+    def updateOpinion(self, change):
+        self.playerOpinion += change
 
     def inInventory(self, item):
         return item in self.inventory
@@ -95,6 +101,16 @@ class Player():
             self.inventory.remove(item)
             return True
         else:
+            return False
+
+    def addToParty(self, ally):
+        self.partymembers.append(ally)
+
+    def removeFromParty(self, character):
+        if character in self.partymembers:
+            self.partymembers.remove(character)
+            return True
+        else: 
             return False
 
     def getInfo(self):

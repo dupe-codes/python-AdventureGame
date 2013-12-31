@@ -11,7 +11,7 @@ class Map():
         #self.scenes = {'Opening_Town': OpeningTownScene()}
         self.start_scene_name = start_scene
         self.player = player
-        self.scenes = {'Opening_Town': OpeningTownScene(player)}
+        self.scenes = {'Opening_Scene': OpeningScene(player), 'Open_Town_Brother': OpenTownBrother(player)}
   #      print 'Map created with player ', player
 
     def opening_scene(self):
@@ -38,6 +38,10 @@ class Engine():
             raw_input("Pause")
             current_scene = self.scene_map.next_scene(next_scene_name)
             print "Map gives new scene: ", current_scene 
+
+    def test(self):
+        test_scene = self.scene_map.next_scene("Opening_Scene")
+        test_scene.run()
 
 
 
