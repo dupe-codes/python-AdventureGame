@@ -15,7 +15,11 @@ class Gunman():
     def __init__(self):
         self.health = 75
 
-classes = {'archer': Archer(), 'swordsman': Swordsman(), 'gunman': Gunman()}
+class Rogue():
+    def __init__(self):
+        self.health = 60
+
+classes = {'archer': Archer(), 'swordsman': Swordsman(), 'gunman': Gunman(), 'rogue': Rogue()}
         
 class Ally:
     def __init__(self, name, char_type, opinion, morale):
@@ -71,9 +75,14 @@ class Player():
         # Map of story event names to player decisions in those events.
         self.decisions = {} 
         
-        # List of characters in player's party
-        # Stored as their character objects 
-        self.partymembers = []
+        # Dictionary of characters in player's party
+        # Stored as their character objects, keys are the
+        # character names
+        self.partymembers = {}
+
+        # Dictionary of other story characters not 
+        # in the player's immediate party
+        self.otherCharacters = {}
 
     def updateHealth(self, change):
         self.health -= change
@@ -104,11 +113,15 @@ class Player():
             return False
 
     def addToParty(self, ally):
-        self.partymembers.append(ally)
+        self.partymembers[ally.name] = ally 
+
+    def getFromParty(self, charName):
+        if charName in self.partymembers.keys():
+            return self.partymembers[charName]
 
     def removeFromParty(self, character):
-        if character in self.partymembers:
-            self.partymembers.remove(character)
+        if character.name in self.partymembers.keys():
+            del self.partymembers[character.name]
             return True
         else: 
             return False

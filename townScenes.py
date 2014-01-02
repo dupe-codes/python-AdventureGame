@@ -104,9 +104,93 @@ class OpenTownBrother(Scene):
         self.player = player
 
     def run(self):
-        print '\n---------------------\n'
+        
+        Jakob = self.player.getFromParty('Jakob')
+
         print('\nYou set a course for the entrance to the woods, walking at a quick pace. \n'
-                'Your brother lags behind you, struggling to keep up.')
+                'Your house fades into the distance behind you, as you work'
+                ' your way down the hill it stands on.\n'
+                'You walk on an old, faint dirt path, beaten into the earth by the footsteps of men, horses,'
+                ' and the pressure of animal carcasses dragged behind them. \n'
+                'Only your family has ever lived up this hill, and so the path is one created by the toils of'
+                ' you and your loved ones.\n\n'
+                'Your brother lags behind you, struggling to keep up.'
+                '\nYou can hear him call out for you to slow down.\n')
+        choice = get_valid_choice('Do you let him catch up?', ['yes', 'no', 'y', 'n'])
+
+        if choice == 'yes' or choice == 'y':
+            print('\nYou slow down your pace just enough to allow your brother to catch up.\n'
+                    'When he makes it to your side, he turns and nods his head in thanks.\n'
+                    'You nod back, knowing your brother appreciates the gesture.')
+            Jakob.updateOpinion(5)
+            self.player.decisions['Brother_Catchup'] = 'yes'
+            #print Jakob.playerOpinion
+
+        else:
+            print('\nYou ignore your brother\'s calls, and continue your quick pace.\n'
+                    'Taking a moment to look back over your shoulder, you see your brother several '
+                    'yards behind you, shaking his head in anger and frustration.\n')
+            Jakob.updateOpinion(-5)
+            self.player.decisions['Brother_Catchup'] = 'no'
+            #print Jakob.playerOpinion
+
+        print('\nAfter walking for several more minutes, you reach the main part of town.\n'
+                'The small town you live in is situated around a rectangular town-center. Rundown buildings line'
+                ' the sides of the townsquare, each ragged with damage. Many have whole sections of their' 
+                ' walls blown out, with sheets of metal haphazardly placed to repair the gaping holes.\n'
+                'Hollow attempts to shelter the building\'s inhabitants from the elements. The cold and rain finds its way'
+                ' in no matter what.\n'
+                'Entering the townsquare, the armory, post office, and sheriff\'s building lie to your left.\n'
+                'In front of you stands the Mayor\'s house and office. Every other building in the'
+                ' square houses some sort of shop, owned by the \"wealthier\" town merchants.')
+
+        print('\n\nYour path to the entrance of the woods continues on the other side of the square, past the Mayor\'s house.'
+                'Walking through the square, you see little signs of the day beginning to start. A few shopkeepers are '
+                'out and about, preparing for a long day of trading. You see the town sheriff sitting outside '
+                'the sheriff\'s building, brushing his horse\'s mane.\n')
+        print ('\nAnd out of the corner of your eye, you see her approaching. She\'s about your age and only '
+                ' a few inches shorter. Her dirty blond hair falls in waves down to her shoulders.\n'
+                'And as you turn to face her, you catch her deep, auburn eyes locked right onto you.')
+
+        Cinder = Ally('Cinder', 'rogue', 80, 70)
+
+        print('\n\"Hey ' + self.player.name + ', in a hurry?\"\n'
+                'Her voice is hoarse, but holds a sweet undertone.\n')
+        print('\nChoices:\n'
+                '1. Yeah, I am. Going hunting.\n'
+                '2. No, I can chat for a bit.\n'
+                '3. None of your business\n')
+        
+        choice = get_valid_choice('Which do you say?', ['1', '2', '3'])
+
+        if choice == '1':
+            print('\n\"Oh I figured, that\'s all you ever do really, go hunting.\"')
+        elif choice == '2':
+            print '\nFor a brief moment, her eyes light up. You can tell your answer pleased her.\n'
+            print('\"Really? Oh, great! I mean, I figured you\'re busy heading out to hunt.\"\n')
+            Cinder.updateOpinion(5)
+        else: 
+            print ('\nYou see a scowl break out on her face, one that she quickly conceals.\n'
+                    'Your answer obviously irritated her.\n')
+            print('\"Feeling snippy today, huh? I already know you\'re going hunting.\"')
+            Cinder.updateOpinion(-5)
+
+        with_brother = self.player.decisions['Brother_Catchup']
+        if with_brother == 'yes':
+            print('\nShe glances over at your brother, standing silent by your side.\n'
+                    '\"Well, good morning to you too, Jakob.\"\n'
+                    '\"Morning Cinder,\" Jakob grunts out in reply.')
+        else:
+            print('\nThe sound of panting arrives beside you, and you turn to see that your '
+                    'brother has finally caught up to you.\n'
+                    '\"Thanks for waiting up for me,\" he sarcastically mutters.\n'
+                    'After a few seconds of catching his breath, he notices the girl standing before you.\n'
+                    '\"Oh hey, Cinder.\"')
+
+
+
+
+
 
 
 class OpeningScene(Scene):
